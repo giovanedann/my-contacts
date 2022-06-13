@@ -5,10 +5,22 @@ class CategoriesRepository {
     const order = orderBy.toLowerCase() === 'desc' ? 'DESC' : 'ASC';
 
     const rows = await database.query(`
-      SELECT * FROM categories ORDER BY name ${order};
+      SELECT *
+      FROM categories
+      ORDER BY name ${order};
     `);
 
     return rows;
+  }
+
+  async findById(id) {
+    const [row] = await database.query(`
+      SELECT *
+      FROM categories
+      WHERE id = $1;
+    `, [id]);
+
+    return row;
   }
 
   async create(name) {
@@ -19,6 +31,25 @@ class CategoriesRepository {
     `, [name]);
 
     return newDatabaseRow;
+  }
+
+  async update(id, { name }) {
+    const [row] = await database.query(`
+      UPDATE categories
+      SET name = $1
+      WHERE id = $2
+      RETURNING *;
+    `, [name, id]);
+
+    return row;
+  }
+
+  async delete(id) {
+    const deleteOperation = await database.query(`
+      DELETE FROM categories WHERE id = $1;
+    `, [id]);
+
+    return deleteOperation;
   }
 }
 
