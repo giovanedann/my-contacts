@@ -10,10 +10,11 @@ class ContactController {
 
   async show(request, response) { // get one register
     const { id } = request.params;
-    const contact = await ContactsRepository.findById(id);
-    return contact
-      ? response.json(contact)
-      : response.status(404).json({ error: 'contact not found' });
+    const contactExists = await ContactsRepository.findById(id);
+
+    return contactExists
+      ? response.json(contactExists)
+      : response.status(400).json({ error: 'contact not found' });
   }
 
   async store(request, response) { // create new register

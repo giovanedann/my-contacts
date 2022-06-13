@@ -9,8 +9,13 @@ class CategoryController {
     response.send(categories);
   }
 
-  show(request, response) {
-    response.send('Show one category');
+  async show(request, response) {
+    const { id } = request.params;
+    const categoryExists = await CategoriesRepository.findById(id);
+
+    return categoryExists
+      ? response.json(categoryExists)
+      : response.status(400).json({ error: 'category not found' });
   }
 
   async store(request, response) {
@@ -25,12 +30,25 @@ class CategoryController {
     return response.json(categoryCreated);
   }
 
-  update(request, response) {
-    response.send('Updates a category');
+  async update(request, response) {
+    const { id } = request.params;
+    const { name } = request.body;
+
+    if (!name) {
+      return response.status(400).json({ error: 'name is required' });
+    }
+
+    const updatedCategory = await CategoriesRepository.update(id, { name });
+
+    return response.json(updatedCategory);
   }
 
-  delete(request, response) {
-    response.send('Deletes a category');
+  async delete(request, response) {
+    const { id } = request.params;
+
+    await CategoriesRepository.delete(id);
+
+    response.sendStatus(204);
   }
 }
 
