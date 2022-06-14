@@ -62,7 +62,7 @@ export const ContactsListContainer = styled.div`
   margin-top: 24px;
 
   header {
-    margin-bottom: 8px;
+    margin-bottom: 16px;
 
     button {
       background: transparent;
@@ -117,6 +117,7 @@ export const Card = styled.div`
     }
 
     span {
+      margin: 5px 0;
       display: block;
       font-size: 14px;
       color: ${({ theme }) => theme.colors.gray.lighter}

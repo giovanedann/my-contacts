@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import { Modal } from '../../components';
-
 import {
   Container, Header, ContactsListContainer, Card, SearchInputContainer,
 } from './styles';
@@ -13,8 +11,6 @@ import thrash from '../../assets/images/icons/thrash.svg';
 export default function Home() {
   return (
     <Container>
-      <Modal danger />
-
       <SearchInputContainer>
         <input
           type="text"

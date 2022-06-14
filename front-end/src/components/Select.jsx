@@ -12,6 +12,7 @@ export default styled.select`
   transition: border-color 0.2s ease-in;
   padding: 0 16px;
   font-size: 16px;
+  appearance: none;
 
   &:focus {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
