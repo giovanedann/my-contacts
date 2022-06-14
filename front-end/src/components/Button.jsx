@@ -1,10 +1,10 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export default styled.button`
-  width: 100%;
   height: 52px;
   border: none;
   border-radius: 4px;
+  padding: 16px;
   font-weight: 600;
   color: #FFF;
   background: ${({ theme }) => theme.colors.primary.main};
@@ -23,4 +23,16 @@ export default styled.button`
     background-color: ${({ theme }) => theme.colors.gray.lighter};
     cursor: default;
   }
+
+  ${({ theme, danger }) => danger && css`
+    background-color: ${theme.colors.danger.main};
+
+    &:hover {
+    background: ${theme.colors.danger.light};
+    }
+
+    &:active {
+      background: ${theme.colors.danger.dark};
+    }
+  `}
 `;

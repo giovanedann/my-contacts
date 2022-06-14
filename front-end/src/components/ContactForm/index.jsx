@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Input from '../Input';
 import Select from '../Select';
 import Button from '../Button';
-import { FormGroup } from '..';
+import FormGroup from '../FormGroup';
 import { Form, ButtonContainer } from './styles';
 
 export default function ContactForm({ buttonLabel }) {
