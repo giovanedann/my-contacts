@@ -58,27 +58,29 @@ export const Header = styled.header`
   }
 `;
 
-export const ContactsListContainer = styled.div`
+export const ContactsListHeader = styled.header`
   margin-top: 24px;
+  margin-bottom: 16px;
 
-  header {
-    margin-bottom: 16px;
 
-    button {
-      background: transparent;
-      border: none;
-      display: flex;
-      align-items: center;
+  button {
+    background: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
 
-      span {
-        color: ${({ theme }) => theme.colors.primary.main};
-        font-size: 16px;
-        font-weight: 600;
-        margin-right: 8px;
-      }
+    span {
+      color: ${({ theme }) => theme.colors.primary.main};
+      font-size: 16px;
+      font-weight: 600;
+      margin-right: 8px;
+    }
+
+    img {
+      transition: 0.3s ease-in-out;
+      transform: ${({ orderBy }) => (orderBy === 'desc' ? 'rotate(0deg)' : 'rotate(180deg)')};
     }
   }
-
 `;
 
 export const Card = styled.div`
