@@ -6,25 +6,43 @@ import {
 } from './styles';
 
 import formatPhone from '../../utils/formatPhone';
+import delay from '../../utils/delay';
 
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import thrash from '../../assets/images/icons/thrash.svg';
 
+import Loader from '../../components/Loader';
+
 export default function Home() {
   const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState('asc');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const filteredContacts = useMemo(() => contacts.filter((contact) => (
     contact.name.toLowerCase().includes(searchTerm.toLowerCase())
   )), [searchTerm, contacts]);
 
   useEffect(() => {
-    fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`)
-      .then((response) => response.json())
-      .then((data) => setContacts([...data]))
-      .catch((error) => console.log(error));
+    async function loadContacts() {
+      try {
+        setIsLoading(true);
+
+        const response = await fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`);
+
+        await delay(1000);
+        const json = await response.json();
+
+        setContacts(json);
+      } catch (error) {
+        console.log('erro', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    loadContacts();
   }, [orderBy]);
 
   function handleToggleOrderBy() {
@@ -39,6 +57,7 @@ export default function Home() {
 
   return (
     <Container>
+      <Loader isLoading={isLoading} />
       <SearchInputContainer>
         <input
           type="text"
