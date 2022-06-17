@@ -15,7 +15,7 @@ class CategoryController {
 
     return categoryExists
       ? response.json(categoryExists)
-      : response.status(400).json({ error: 'category not found' });
+      : response.status(404).json({ error: 'category not found' });
   }
 
   async store(request, response) {
@@ -27,7 +27,7 @@ class CategoryController {
 
     const categoryCreated = await CategoriesRepository.create(name);
 
-    return response.json(categoryCreated);
+    return response.status(201).json(categoryCreated);
   }
 
   async update(request, response) {

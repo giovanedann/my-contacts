@@ -10,6 +10,7 @@ export default {
     gray: {
       darker: '#222222',
       lighter: '#BCBCBC',
+      veryLight: '#E5E5E5',
     },
     danger: {
       main: '#FC5050',

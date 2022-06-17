@@ -14,7 +14,7 @@ class ContactController {
 
     return contactExists
       ? response.json(contactExists)
-      : response.status(400).json({ error: 'contact not found' });
+      : response.status(404).json({ error: 'contact not found' });
   }
 
   async store(request, response) { // create new register
@@ -29,14 +29,14 @@ class ContactController {
     const contactExists = await ContactsRepository.findByEmail(email);
 
     if (contactExists) {
-      return response.status(404).json({ error: 'email already in use' });
+      return response.status(400).json({ error: 'email already in use' });
     }
 
     const contact = await ContactsRepository.create({
       name, email, phone, category_id,
     });
 
-    return response.json(contact);
+    return response.status(201).json(contact);
   }
 
   async update(request, response) { // edit a register
@@ -46,13 +46,13 @@ class ContactController {
     } = request.body;
 
     if (!name) {
-      return response.status(404).json({ error: 'name field is required' });
+      return response.status(400).json({ error: 'name field is required' });
     }
 
     const contactExists = await ContactsRepository.findById(id);
 
     if (!contactExists) {
-      return response.status(400).json({ error: 'contact not found' });
+      return response.status(404).json({ error: 'contact not found' });
     }
 
     const contactFoundByMail = await ContactsRepository.findByEmail(email);
