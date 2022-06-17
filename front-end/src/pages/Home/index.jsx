@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 import {
   Container, Header, ContactsListHeader,
   Card, SearchInputContainer, ErrorContainer,
-  EmptyListContainer,
+  EmptyListContainer, NoContactFoundContainer,
 } from './styles';
 
 import formatPhone from '../../utils/formatPhone';
@@ -19,6 +19,7 @@ import edit from '../../assets/images/icons/edit.svg';
 import thrash from '../../assets/images/icons/thrash.svg';
 import sad from '../../assets/images/icons/sad.svg';
 import emptyBox from '../../assets/images/empty-box.svg';
+import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 
 import { Loader } from '../../components';
 import Button from '../../components/Button';
@@ -98,7 +99,7 @@ export default function Home() {
             { filteredContacts.length === 1 ? 'contact' : 'contacts' }
           </strong>
         )}
-        <Link to="/new">New Contact</Link>
+        {!isLoading && <Link to="/new">New Contact</Link>}
       </Header>
 
       { hasError && (
@@ -128,6 +129,13 @@ export default function Home() {
                 Click on <strong>New Contact</strong> above to register your first contact!
               </p>
             </EmptyListContainer>
+          )}
+
+          { (contacts.length > 0 && !filteredContacts.length && !isLoading) && (
+            <NoContactFoundContainer>
+              <img src={magnifierQuestion} alt="contact not found icon" />
+              <span>Contact <strong>{searchTerm}</strong> not found.</span>
+            </NoContactFoundContainer>
           )}
 
           { Boolean(filteredContacts.length) && (
