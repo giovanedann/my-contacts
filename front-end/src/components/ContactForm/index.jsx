@@ -67,7 +67,6 @@ export default function ContactForm({ buttonLabel, onSubmit }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-
     onSubmit({
       name, email, phone, categoryId,
     });
