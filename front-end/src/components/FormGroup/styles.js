@@ -15,4 +15,14 @@ export const Container = styled.div`
     display: block;
     margin-top: 8px;
   }
+
+  .form-field {
+    position: relative;
+
+    .spinner-container {
+      position: absolute;
+      right: 16px;
+      top: 17.5px;
+    }
+  }
 `;
