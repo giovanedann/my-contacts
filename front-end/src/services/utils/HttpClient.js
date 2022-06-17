@@ -24,7 +24,7 @@ class HttpClient {
     const response = await fetch(`${this.baseURL}${path}`, {
       method: options?.method,
       body: JSON.stringify(options?.body),
-      headers: options?.headers,
+      headers,
     });
 
     let responseBody = null;
