@@ -7,6 +7,7 @@ export default function NewContact() {
       const {
         name, email, phone, categoryId,
       } = formData;
+
       const contact = {
         name,
         email,
