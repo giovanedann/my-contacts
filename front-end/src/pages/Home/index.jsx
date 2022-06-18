@@ -155,7 +155,7 @@ export default function Home() {
                   { contact.category_name && <small>{ contact.category_name }</small> }
                 </div>
                 <span>{ contact.email }</span>
-                <span>{ formatPhone(contact.phone) }</span>
+                <span>{ contact.phone && formatPhone(contact.phone) }</span>
               </div>
 
               <div className="actions">
