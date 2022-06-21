@@ -22,8 +22,8 @@ export const Container = styled.div`
   align-items: center;
   ${({ type }) => containerVariants[type] || containerVariants.default};
 
-  strong {
-    margin-left: 8px;
+  img {
+    margin-right: 8px;
   }
 
   & + & {
