@@ -76,10 +76,6 @@ export default function ContactForm({ buttonLabel, onSubmit }) {
     });
 
     setIsSubmitting(false);
-    setName('');
-    setEmail('');
-    setCategoryId('');
-    setPhone('');
   }
 
   return (
