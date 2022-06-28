@@ -21,6 +21,7 @@ export default function NewContact() {
       toast({
         type: 'success',
         text: 'Contact saved successfully!',
+        duration: 3000,
       });
     } catch (error) {
       toast({

@@ -29,4 +29,8 @@ export const Container = styled.div`
   & + & {
     margin-top: 16px;
   }
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
