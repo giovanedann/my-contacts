@@ -45,7 +45,8 @@ export default function EditContact() {
         category_id: categoryId,
       };
 
-      await ContactsService.updateContact(id, contact);
+      await ContactsService.updateContact(id, contact)
+        .then((updatedContactData) => setContactName(updatedContactData.name));
 
       toast({
         type: 'success',
@@ -67,7 +68,7 @@ export default function EditContact() {
       <ContactForm
         ref={contactFormRef}
         buttonLabel="Save Changes"
-        onSubmit={() => handleSubmit()}
+        onSubmit={(formData) => handleSubmit(formData)}
       />
     </>
   );
