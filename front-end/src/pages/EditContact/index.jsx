@@ -32,8 +32,32 @@ export default function EditContact() {
     loadContact();
   }, [id, push]);
 
-  function handleSubmit() {
-    //
+  async function handleSubmit(formData) {
+    try {
+      const {
+        name, email, phone, categoryId,
+      } = formData;
+
+      const contact = {
+        name,
+        email,
+        phone,
+        category_id: categoryId,
+      };
+
+      await ContactsService.updateContact(id, contact);
+
+      toast({
+        type: 'success',
+        text: 'Contact updated successfully!',
+        duration: 3000,
+      });
+    } catch (error) {
+      toast({
+        type: 'danger',
+        text: 'An error occurred while editing your contact.',
+      });
+    }
   }
 
   return (

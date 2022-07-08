@@ -26,7 +26,7 @@ export default function NewContact() {
     } catch (error) {
       toast({
         type: 'danger',
-        text: 'An error occurred while creating your contact',
+        text: 'An error occurred while creating your contact!',
       });
     }
   }
