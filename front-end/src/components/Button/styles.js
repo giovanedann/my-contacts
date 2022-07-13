@@ -23,8 +23,8 @@ export const StyledButton = styled.button`
   }
 
   &:disabled {
-    background-color: ${({ theme }) => theme.colors.gray.lighter};
-    cursor: default;
+    background-color: ${({ theme }) => theme.colors.gray.lighter} !important;
+    cursor: default !important;
   }
 
   ${({ theme, danger }) => danger && css`
