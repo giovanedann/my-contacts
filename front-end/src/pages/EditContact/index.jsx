@@ -3,14 +3,13 @@ import { useParams, useHistory } from 'react-router-dom';
 import { Loader, ContactForm, PageHeader } from '../../components';
 import ContactsService from '../../services/ContactsService';
 import toast from '../../utils/toast';
-
-import useIsMounted from '../../hooks/useIsMounted';
+import useSafeAsyncAction from '../../hooks/useSafeAsyncAction';
 
 export default function EditContact() {
   const [isLoading, setIsLoading] = useState(true);
   const [contactName, setContactName] = useState('');
   const contactFormRef = useRef(null);
-  const isMounted = useIsMounted();
+  const safeAsyncAction = useSafeAsyncAction();
 
   const { id } = useParams();
   const { push } = useHistory();
@@ -20,24 +19,24 @@ export default function EditContact() {
       try {
         const contactData = await ContactsService.getContactById(id);
 
-        if (isMounted()) {
+        safeAsyncAction(() => {
           contactFormRef.current.setFieldsValues(contactData);
           setIsLoading(false);
           setContactName(contactData.name);
-        }
+        });
       } catch {
-        if (isMounted()) {
+        safeAsyncAction(() => {
           push('/');
           toast({
             type: 'danger',
             text: 'Contact not found.',
           });
-        }
+        });
       }
     }
 
     loadContact();
-  }, [id, push, isMounted]);
+  }, [id, push, safeAsyncAction]);
 
   async function handleSubmit(formData) {
     try {
