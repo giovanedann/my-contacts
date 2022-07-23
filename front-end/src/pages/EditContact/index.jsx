@@ -16,7 +16,9 @@ export default function EditContact() {
     async function loadContact() {
       try {
         const contactData = await ContactsService.getContactById(id);
+
         contactFormRef.current.setFieldsValues(contactData);
+
         setIsLoading(false);
         setContactName(contactData.name);
       } catch {
@@ -24,7 +26,6 @@ export default function EditContact() {
         toast({
           type: 'danger',
           text: 'Contact not found.',
-          duration: 2000,
         });
       }
     }
