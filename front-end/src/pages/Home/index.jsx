@@ -118,7 +118,7 @@ export default function Home() {
         <p>This action cannot be undone!</p>
       </Modal>
 
-      { contacts.length > 0 && (
+      {contacts.length > 0 && (
         <SearchInputContainer>
           <input
             type="text"
@@ -142,15 +142,15 @@ export default function Home() {
       >
         {(!hasError && contacts.length > 0) && (
           <strong>
-            { filteredContacts.length }
+            {filteredContacts.length}
             {' '}
-            { filteredContacts.length === 1 ? 'contact' : 'contacts' }
+            {filteredContacts.length === 1 ? 'contact' : 'contacts'}
           </strong>
         )}
         {!isLoading && <Link to="/new">New Contact</Link>}
       </Header>
 
-      { hasError && (
+      {hasError && (
         <ErrorContainer>
           <img src={sad} alt="Sad icon" />
           <div className="error-details">
@@ -169,7 +169,7 @@ export default function Home() {
 
       {!hasError && (
         <>
-          { (!contacts.length && !isLoading) && (
+          {(!contacts.length && !isLoading) && (
             <EmptyListContainer>
               <img src={emptyBox} alt="empty box icon" />
               <p>
@@ -179,31 +179,31 @@ export default function Home() {
             </EmptyListContainer>
           )}
 
-          { (contacts.length > 0 && !filteredContacts.length && !isLoading) && (
+          {(contacts.length > 0 && !filteredContacts.length && !isLoading) && (
             <NoContactFoundContainer>
               <img src={magnifierQuestion} alt="contact not found icon" />
               <span>Contact <strong>{searchTerm}</strong> not found.</span>
             </NoContactFoundContainer>
           )}
 
-          { Boolean(filteredContacts.length) && (
-          <ContactsListHeader orderBy={orderBy}>
-            <button type="button" className="sort-button" onClick={handleToggleOrderBy}>
-              <span>Name</span>
-              <img src={arrow} alt="Sort arrow" />
-            </button>
-          </ContactsListHeader>
+          {Boolean(filteredContacts.length) && (
+            <ContactsListHeader orderBy={orderBy}>
+              <button type="button" className="sort-button" onClick={handleToggleOrderBy}>
+                <span>Name</span>
+                <img src={arrow} alt="Sort arrow" />
+              </button>
+            </ContactsListHeader>
           )}
 
-          { filteredContacts.map((contact) => (
+          {filteredContacts.map((contact) => (
             <Card key={contact.id}>
               <div className="info">
                 <div className="contact-name">
-                  <strong>{ contact.name }</strong>
-                  { contact.category_name && <small>{ contact.category_name }</small> }
+                  <strong>{contact.name}</strong>
+                  {contact.category_name && <small>{contact.category_name}</small>}
                 </div>
-                <span>{ contact.email }</span>
-                <span>{ contact.phone && formatPhone(contact.phone) }</span>
+                <span>{contact.email}</span>
+                <span>{contact.phone && formatPhone(contact.phone)}</span>
               </div>
 
               <div className="actions">
@@ -222,7 +222,6 @@ export default function Home() {
           ))}
         </>
       )}
-
     </Container>
   );
 }

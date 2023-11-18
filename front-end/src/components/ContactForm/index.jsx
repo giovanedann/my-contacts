@@ -35,10 +35,11 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
 
   useImperativeHandle(ref, () => ({
     setFieldsValues: (contact) => {
+      console.log({ contact });
       setName(contact.name ?? '');
       setEmail(contact.email ?? '');
       setPhone(formatPhone(contact.phone ?? ''));
-      setCategoryId(contact.categoryId ?? '');
+      setCategoryId(contact.category_id ?? '');
     },
     resetFields: () => {
       setName('');
@@ -54,7 +55,7 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
         setIsLoadingCategories(true);
         const categoriesList = await CategoriesService.listCategories();
         setCategories(categoriesList);
-      } catch {} finally {
+      } catch { } finally {
         setIsLoadingCategories(false);
       }
     }
@@ -138,8 +139,8 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
           onChange={({ target }) => setCategoryId(target.value)}
           disabled={isLoadingCategories || isSubmitting}
         >
-          <option value="">No category</option>
-          { categories.map((category) => (
+          <option value="">No category selected</option>
+          {categories.map((category) => (
             <option key={category.id} value={category.id}>
               {category.name}
             </option>
@@ -153,7 +154,7 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
           disabled={!isFormValid}
           isLoading={isSubmitting}
         >
-          { buttonLabel }
+          {buttonLabel}
         </Button>
       </ButtonContainer>
     </Form>
