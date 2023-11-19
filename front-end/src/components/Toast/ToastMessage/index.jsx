@@ -1,24 +1,12 @@
-import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Container } from './styles';
 
 import xCircleIcon from '../../../assets/images/icons/x-circle.svg';
 import checkCircleIcon from '../../../assets/images/icons/check-circle.svg';
+import { useToastMessage } from './useToastMessage';
 
 export default function ToastMessage({ message, onMessageRemove }) {
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      onMessageRemove(message.id);
-    }, message.duration || 7000);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [message, onMessageRemove]);
-
-  function handleRemoveToast() {
-    onMessageRemove(message.id);
-  }
+  const { handleRemoveToast } = useToastMessage({ message, onMessageRemove });
 
   return (
     <Container
@@ -27,9 +15,9 @@ export default function ToastMessage({ message, onMessageRemove }) {
       tabIndex={0}
       role="button"
     >
-      { message.type === 'danger' && <img src={xCircleIcon} alt="X" />}
-      { message.type === 'success' && <img src={checkCircleIcon} alt="Check" />}
-      <strong>{ message.text }</strong>
+      {message.type === 'danger' && <img src={xCircleIcon} alt="X" />}
+      {message.type === 'success' && <img src={checkCircleIcon} alt="Check" />}
+      <strong>{message.text}</strong>
     </Container>
   );
 }
