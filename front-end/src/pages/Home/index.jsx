@@ -1,9 +1,8 @@
-/* eslint-disable no-nested-ternary */
 /* eslint-disable react/jsx-one-expression-per-line */
 import { Link } from 'react-router-dom';
 
 import {
-  Container, Header, ContactsListHeader,
+  Container, ContactsListHeader,
   Card, ErrorContainer,
   EmptyListContainer, NoContactFoundContainer,
 } from './styles';
@@ -20,7 +19,7 @@ import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 import { Loader, Modal } from '../../components';
 import Button from '../../components/Button';
 import { useHome } from './useHome';
-import { InputSearch } from './components';
+import { Header, InputSearch } from './components';
 
 export default function Home() {
   const {
@@ -50,25 +49,11 @@ export default function Home() {
       )}
 
       <Header
-        justifyContent={(
-          hasError
-            ? 'flex-end'
-            : (
-              contacts.length > 0
-                ? 'space-between'
-                : 'center'
-            )
-        )}
-      >
-        {(!hasError && contacts.length > 0) && (
-          <strong>
-            {filteredContacts.length}
-            {' '}
-            {filteredContacts.length === 1 ? 'contact' : 'contacts'}
-          </strong>
-        )}
-        {!isLoading && <Link to="/new">New Contact</Link>}
-      </Header>
+        contactsLength={contacts.length}
+        filteredContactsLength={filteredContacts.length}
+        hasError={hasError}
+        isLoading={isLoading}
+      />
 
       {hasError && (
         <ErrorContainer>
