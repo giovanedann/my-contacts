@@ -1,12 +1,10 @@
-import { useEffect, useState, useRef } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
-
+import { useEffect, useRef, useState } from 'react';
+import { useHistory, useParams } from 'react-router-dom/cjs/react-router-dom';
+import useSafeAsyncAction from '../../hooks/useSafeAsyncAction';
 import ContactsService from '../../services/ContactsService';
 import toast from '../../utils/toast';
-import useSafeAsyncAction from '../../hooks/useSafeAsyncAction';
-import Presentation from './Presentation';
 
-export default function EditContact() {
+export function useEditContact() {
   const [isLoading, setIsLoading] = useState(true);
   const [contactName, setContactName] = useState('');
   const contactFormRef = useRef(null);
@@ -57,12 +55,10 @@ export default function EditContact() {
     }
   }
 
-  return (
-    <Presentation
-      contactFormRef={contactFormRef}
-      contactName={contactName}
-      isLoading={isLoading}
-      onSubmit={handleSubmit}
-    />
-  );
+  return {
+    isLoading,
+    handleSubmit,
+    contactFormRef,
+    contactName,
+  };
 }
