@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import {
   Container, Header, ContactsListHeader,
-  Card, SearchInputContainer, ErrorContainer,
+  Card, ErrorContainer,
   EmptyListContainer, NoContactFoundContainer,
 } from './styles';
 
@@ -20,6 +20,7 @@ import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 import { Loader, Modal } from '../../components';
 import Button from '../../components/Button';
 import { useHome } from './useHome';
+import { InputSearch } from './components';
 
 export default function Home() {
   const {
@@ -44,27 +45,8 @@ export default function Home() {
     <Container>
       <Loader isLoading={isLoading} />
 
-      <Modal
-        danger
-        isLoading={isLoadingDelete}
-        visible={isDeleteModalVisible}
-        title={`Are you sure you want to delete the contact ${contactBeingDeleted?.name}?`}
-        confirmLabel="Delete"
-        onCancel={() => handleCloseDeleteModal()}
-        onConfirm={() => handleConfirmDeleteContact(contactBeingDeleted)}
-      >
-        <p>This action cannot be undone!</p>
-      </Modal>
-
       {contacts.length > 0 && (
-        <SearchInputContainer>
-          <input
-            type="text"
-            placeholder="Search contact by name..."
-            value={searchTerm}
-            onChange={handleChangeSearchTerm}
-          />
-        </SearchInputContainer>
+        <InputSearch onChange={handleChangeSearchTerm} value={searchTerm} />
       )}
 
       <Header
@@ -158,6 +140,18 @@ export default function Home() {
               </div>
             </Card>
           ))}
+
+          <Modal
+            danger
+            isLoading={isLoadingDelete}
+            visible={isDeleteModalVisible}
+            title={`Are you sure you want to delete the contact ${contactBeingDeleted?.name}?`}
+            confirmLabel="Delete"
+            onCancel={() => handleCloseDeleteModal()}
+            onConfirm={() => handleConfirmDeleteContact(contactBeingDeleted)}
+          >
+            <p>This action cannot be undone!</p>
+          </Modal>
         </>
       )}
     </Container>
