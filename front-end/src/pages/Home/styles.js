@@ -85,29 +85,6 @@ export const Card = styled.div`
   }
 `;
 
-export const ErrorContainer = styled.div`
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  .error-details {
-    margin-left: 24px;
-    display: flex;
-    flex-direction: column;
-
-    strong {
-      font-size: 22px;
-      color: ${({ theme }) => theme.colors.danger.main};
-      margin-bottom: 8px;
-    }
-
-    button {
-      width: 65%;
-    }
-  }
-`;
-
 export const EmptyListContainer = styled.div`
   margin-top: 32px;
   display: flex;

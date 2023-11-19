@@ -2,9 +2,11 @@
 import { Link } from 'react-router-dom';
 
 import {
-  Container, ContactsListHeader,
-  Card, ErrorContainer,
-  EmptyListContainer, NoContactFoundContainer,
+  Container,
+  ContactsListHeader,
+  Card,
+  EmptyListContainer,
+  NoContactFoundContainer,
 } from './styles';
 
 import formatPhone from '../../utils/formatPhone';
@@ -12,14 +14,12 @@ import formatPhone from '../../utils/formatPhone';
 import arrow from '../../assets/images/icons/arrow.svg';
 import edit from '../../assets/images/icons/edit.svg';
 import thrash from '../../assets/images/icons/thrash.svg';
-import sad from '../../assets/images/icons/sad.svg';
 import emptyBox from '../../assets/images/empty-box.svg';
 import magnifierQuestion from '../../assets/images/magnifier-question.svg';
 
 import { Loader, Modal } from '../../components';
-import Button from '../../components/Button';
 import { useHome } from './useHome';
-import { Header, InputSearch } from './components';
+import { ErrorStatus, Header, InputSearch } from './components';
 
 export default function Home() {
   const {
@@ -56,20 +56,7 @@ export default function Home() {
       />
 
       {hasError && (
-        <ErrorContainer>
-          <img src={sad} alt="Sad icon" />
-          <div className="error-details">
-            <strong className="error-message">
-              An error has occurred while loading your contacts!
-            </strong>
-            <Button
-              type="button"
-              onClick={() => handleTryAgain()}
-            >
-              Try again
-            </Button>
-          </div>
-        </ErrorContainer>
+        <ErrorStatus onTryAgainClick={handleTryAgain} />
       )}
 
       {!hasError && (
