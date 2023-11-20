@@ -4,11 +4,10 @@ import { useAnimatedList } from '../../../hooks/useAnimatedList';
 
 export function useToastContainer() {
   const {
-    items: messages,
-    pendingRemovalItemsIds,
     setItems: setMessages,
     handleAnimationEnd,
     handleRemoveItem,
+    renderList,
   } = useAnimatedList();
 
   useEffect(() => {
@@ -29,9 +28,8 @@ export function useToastContainer() {
   }, [setMessages]);
 
   return {
-    messages,
-    pendingRemovalItemsIds,
     handleAnimationEnd,
     handleRemoveItem,
+    renderList,
   };
 }
