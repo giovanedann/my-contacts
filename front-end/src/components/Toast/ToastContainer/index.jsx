@@ -3,7 +3,7 @@ import ToastMessage from '../ToastMessage';
 import { useToastContainer } from './useToastContainer';
 
 export default function ToastContainer() {
-  const { messages, handleRemoveMessage } = useToastContainer();
+  const { messages, handleRemoveMessage, pendingRemovalMessagesIds } = useToastContainer();
 
   return (
     <Container>
@@ -12,6 +12,7 @@ export default function ToastContainer() {
           key={message.id}
           message={message}
           onMessageRemove={(messageId) => handleRemoveMessage(messageId)}
+          isLeaving={pendingRemovalMessagesIds.includes(message.id)}
         />
       ))}
     </Container>

@@ -3,6 +3,7 @@ import { toastEventManager } from '../../../utils/toast';
 
 export function useToastContainer() {
   const [messages, setMessages] = useState([]);
+  const [pendingRemovalMessagesIds, setPendingRemovalMessagesIds] = useState([]);
 
   useEffect(() => {
     function handleAddToast({ type, text, duration }) {
@@ -22,13 +23,12 @@ export function useToastContainer() {
   }, []);
 
   const handleRemoveMessage = useCallback((messageId) => {
-    setMessages((prevState) => (
-      prevState.filter((message) => message.id !== messageId)
-    ));
+    setPendingRemovalMessagesIds((prev) => [...prev, messageId]);
   }, []);
 
   return {
     messages,
     handleRemoveMessage,
+    pendingRemovalMessagesIds,
   };
 }
