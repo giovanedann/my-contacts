@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { Overlay, Container, Footer } from './styles';
 import Button from '../Button';
 import ReactPortal from '../ReactPortal';
@@ -14,17 +15,37 @@ export default function Modal({
   onCancel,
   onConfirm,
 }) {
-  if (!visible) {
+  const [shouldRender, setShouldRender] = useState(visible);
+
+  useEffect(() => {
+    if (visible) {
+      setShouldRender(true);
+    }
+
+    let timeoutId;
+
+    if (!visible) {
+      timeoutId = setTimeout(() => { // eslint-disable-line prefer-const
+        setShouldRender(false);
+      }, 300);
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [visible]);
+
+  if (!shouldRender) {
     return null;
   }
 
   return (
     <ReactPortal containerId="modal-root">
-      <Overlay>
-        <Container danger={danger}>
-          <h1>{ title }</h1>
+      <Overlay isLeaving={!visible}>
+        <Container danger={danger} isLeaving={!visible}>
+          <h1>{title}</h1>
           <div className="modal-body">
-            { children }
+            {children}
           </div>
           <Footer>
             <button
@@ -33,7 +54,7 @@ export default function Modal({
               onClick={() => onCancel()}
               disabled={isLoading}
             >
-              { cancelLabel }
+              {cancelLabel}
             </button>
             <Button
               type="button"
@@ -41,7 +62,7 @@ export default function Modal({
               onClick={() => onConfirm()}
               isLoading={isLoading}
             >
-              { confirmLabel }
+              {confirmLabel}
             </Button>
           </Footer>
         </Container>
