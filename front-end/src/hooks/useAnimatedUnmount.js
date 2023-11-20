@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
-export function useAnimatedUnmount({ visible }) {
-  const [shouldRender, setShouldRender] = useState(visible);
+export function useAnimatedUnmount({ trigger }) {
+  const [shouldRender, setShouldRender] = useState(trigger);
   const ref = useRef(null);
 
   useEffect(() => {
-    if (visible) {
+    if (trigger) {
       setShouldRender(true);
     }
 
@@ -15,7 +15,7 @@ export function useAnimatedUnmount({ visible }) {
 
     const refElement = ref.current;
 
-    if (!visible && refElement) {
+    if (!trigger && refElement) {
       refElement.addEventListener('animationend', handleAnimationEnd);
     }
 
@@ -24,7 +24,7 @@ export function useAnimatedUnmount({ visible }) {
         refElement.removeEventListener('animationend', handleAnimationEnd);
       }
     };
-  }, [visible]);
+  }, [trigger]);
 
   return { shouldRender, ref };
 }
