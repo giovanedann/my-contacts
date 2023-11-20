@@ -15,7 +15,7 @@ export default function Modal({
   onCancel,
   onConfirm,
 }) {
-  const { shouldRender, ref } = useAnimatedUnmount({ visible });
+  const { shouldRender, ref } = useAnimatedUnmount({ trigger: visible });
 
   if (!shouldRender) {
     return null;
