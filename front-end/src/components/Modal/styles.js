@@ -31,7 +31,7 @@ export const Overlay = styled.div`
   width: 100%;
   height: 100%;
   inset: 0;
-  animation: ${({ isLeaving }) => (isLeaving ? fadeOut : fadeIn)} 0.3s;
+  animation: ${({ isLeaving }) => (isLeaving ? fadeOut : fadeIn)} 0.3s forwards;
 `;
 
 export const Container = styled.div`
@@ -41,7 +41,7 @@ export const Container = styled.div`
   border-radius: 4px;
   padding: 24px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  animation: ${({ isLeaving }) => (isLeaving ? scaleOut : scaleIn)} 0.3s;
+  animation: ${({ isLeaving }) => (isLeaving ? scaleOut : scaleIn)} 0.3s forwards;
 
   > h1 {
     color: ${({ theme, danger }) => danger && theme.colors.danger.main};
