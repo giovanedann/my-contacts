@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
+import { memo } from 'react';
 import { Container } from './styles';
 
 import xCircleIcon from '../../../assets/images/icons/x-circle.svg';
 import checkCircleIcon from '../../../assets/images/icons/check-circle.svg';
 import { useToastMessage } from './useToastMessage';
 
-export default function ToastMessage({
+function ToastMessage({
   message, onMessageRemove, isLeaving, animatedRef,
 }) {
   const { handleRemoveToast } = useToastMessage({ message, onMessageRemove });
@@ -37,3 +38,5 @@ ToastMessage.propTypes = {
   isLeaving: PropTypes.bool.isRequired,
   animatedRef: PropTypes.shape().isRequired,
 };
+
+export default memo(ToastMessage);
