@@ -5,7 +5,6 @@ import { useAnimatedList } from '../../../hooks/useAnimatedList';
 export function useToastContainer() {
   const {
     setItems: setMessages,
-    handleAnimationEnd,
     handleRemoveItem,
     renderList,
   } = useAnimatedList();
@@ -28,7 +27,6 @@ export function useToastContainer() {
   }, [setMessages]);
 
   return {
-    handleAnimationEnd,
     handleRemoveItem,
     renderList,
   };
