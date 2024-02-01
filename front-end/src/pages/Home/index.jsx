@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-one-expression-per-line */
 import { Container } from './styles';
-import { Loader, Modal, Spinner } from '../../components';
+import { Loader, Modal } from '../../components';
 import { useHome } from './useHome';
 import {
   ErrorStatus, Header, InputSearch, SearchNotFound, EmptyList, ContactsList,
@@ -8,7 +8,6 @@ import {
 
 export default function Home() {
   const {
-    isPending,
     isLoading,
     isLoadingDelete,
     isDeleteModalVisible,
@@ -49,8 +48,6 @@ export default function Home() {
 
       {hasContacts && (
         <>
-          {isPending && <Spinner />}
-
           <ContactsList
             filteredContacts={filteredContacts}
             onToggleOrderBy={handleToggleOrderBy}
