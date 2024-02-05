@@ -14,16 +14,20 @@ export function useEditContact() {
   const { push } = useHistory();
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function loadContact() {
       try {
-        const contactData = await ContactsService.getContactById(id);
+        const contactData = await ContactsService.getContactById(id, controller.signal);
 
         safeAsyncAction(() => {
           contactFormRef.current.setFieldsValues(contactData);
           setIsLoading(false);
           setContactName(contactData.name);
         });
-      } catch {
+      } catch (error) {
+        if (error instanceof DOMException && error.name === 'AbortError') return;
+
         safeAsyncAction(() => {
           push('/');
           toast({
